@@ -28,7 +28,12 @@ class Location:
         
 laptop = Item("Gaming Laptop", "LAP01")
 shelf_a = Location("shelf_a")
-shelf_a.add_stock(laptop, 5)
+# shelf_a.add_stock(laptop, 5)
 
-shelf_a.show_items() 
+def putaway(item, qty, location):
+    print(f"putaway: {item.name} qty: {qty}")
+    location.add_stock(item, qty)
+    print(f"added on {location.name}")
 
+putaway(laptop, 5, shelf_a)
+shelf_a.show_stock() 
