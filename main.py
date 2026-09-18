@@ -25,15 +25,23 @@ class Location:
 
     def show_stock(self):
         print(self.inventory)
-        
-laptop = Item("Gaming Laptop", "LAP01")
-shelf_a = Location("shelf_a")
-# shelf_a.add_stock(laptop, 5)
+
+def basic_receiveing(location, item, qty=1):
+    location.add_stock(item, qty)
+    print(f"Received: \n{item} \nQuantity: {qty}")
 
 def putaway(item, qty, location):
     print(f"putaway: {item.name} qty: {qty}")
     location.add_stock(item, qty)
     print(f"added on {location.name}")
 
-putaway(laptop, 5, shelf_a)
-shelf_a.show_stock() 
+laptop = Item("Gaming Laptop", "LAP01")
+shelf_a = Location("shelf_a")
+
+rec_zone = Location("RECEIVE")
+basic_receiveing(rec_zone, laptop, 7)
+
+rec_zone.show_stock()
+
+# putaway(laptop, 5, shelf_a)
+# shelf_a.show_stock() 
