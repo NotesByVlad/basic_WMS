@@ -8,6 +8,31 @@ class Item:
     def __repr__(self):
         return f"{self.name} ({self.sku})"
 
+class LicensePlateNumber:
+    """Represents a unique License Plate Number (LPN) or Handling Unit (HU).
+
+    An LPN is a unique barcode sticker assigned to a physical container—such 
+    as a box, tote, or pallet. This class acts as that container, allowing the 
+    application to track the container itself rather than individual loose items.
+    """
+    
+    def __init__(self, lpn_id):
+        self.lpn_id = lpn_id
+        self.inventory = {}
+
+    def add_item_stock(self, item, qty):
+        if item in self.inventory:
+            self.inventory[item] += qty
+        else:
+            self.inventory[item] = qty
+
+    def remove_item_stock(self, item, qty):
+        self.inventory[item] -= qty
+        if self.inventory[item] == 0:
+            del self.inventory[item]
+
+    def __repr__(self):
+        return f"LPN [{self.lpn_id}] -> {self.inventory}"
 
 class Location:
     def __init__(self, name):
