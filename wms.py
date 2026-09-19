@@ -15,7 +15,7 @@ class LicensePlateNumber:
     as a box, tote, or pallet. This class acts as that container, allowing the 
     application to track the container itself rather than individual loose items.
     """
-    
+
     def __init__(self, lpn_id):
         self.lpn_id = lpn_id
         self.inventory = {}
@@ -37,21 +37,17 @@ class LicensePlateNumber:
 class Location:
     def __init__(self, name):
         self.name = name
-        self.inventory = {}  
+        self.containers = []  
 
-    def add_stock(self, item, qty):
-        if item in self.inventory:
-            self.inventory[item] += qty
-        else:
-            self.inventory[item] = qty
+    def add_container(self, lpn):
+        self.containers.append(lpn)
 
-    def remove_stock(self, item, qty):
-        self.inventory[item] -= qty
-        if self.inventory[item] == 0:
-            del self.inventory[item]
+    def remove_stock(self, lpn):
+        if lpn in self.containers:
+            self.containers.remove(lpn)
 
     def show_stock(self):
-        print(self.inventory)
+        print(self.containers)
 
 # Processes
 # ---
