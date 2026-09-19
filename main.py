@@ -1,3 +1,5 @@
+# Models
+# ---
 class Item:
     def __init__(self, name, sku):
         self.name = name
@@ -26,6 +28,8 @@ class Location:
     def show_stock(self):
         print(self.inventory)
 
+# Processes
+# ---
 def basic_receiveing(location, item, qty=1):
     location.add_stock(item, qty)
     print(f"Received: \n{item} \nQuantity: {qty}")
@@ -35,13 +39,28 @@ def putaway(item, qty, location):
     location.add_stock(item, qty)
     print(f"added on {location.name}")
 
+def picking(from_location, to_location, item, qty):
+    from_location.remove_stock(item, qty)
+    to_location.add_stock(item, qty)
+
+def packing(from_location, to_location, item, qty):
+    from_location.remove_stock(item, qty)
+    to_location.add_stock(item, qty)
+
+# - - -
+# - -
+# -
+
 laptop = Item("Gaming Laptop", "LAP01")
 shelf_a = Location("shelf_a")
 
 rec_zone = Location("RECEIVE")
 basic_receiveing(rec_zone, laptop, 7)
-
 rec_zone.show_stock()
+
+pack_zone = Location("PACKING")
+
+ship_zone = Location("SHIPPING")
 
 # putaway(laptop, 5, shelf_a)
 # shelf_a.show_stock() 
